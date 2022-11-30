@@ -10,6 +10,8 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
 {
     class Player : BaseObject
     {
+        public Action<BaseObject> OnMarkerOverlap;
+        public float vectorX, vectorY;
         public Player(float X, float Y, float Angle) : base(X, Y, Angle)
         { }
 
@@ -25,6 +27,16 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
             var path = base.GetGraphicsPath();
             path.AddEllipse(-15, -15, 30, 30);
             return path;
+        }
+
+        public override void Overlap(BaseObject obj)
+        {
+            base.Overlap(obj);
+
+            if (obj is Marker)
+            {
+                OnMarkerOverlap(obj as Marker);
+            }
         }
     }
 }

@@ -29,10 +29,41 @@ namespace ZiminN_ISTb_21_2_lab5
             {
                 txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
             };
+
+            player.OnMarkerOverlap += (m) =>
+            {
+                objects.Remove(m);
+                marker = null;
+            };
         }
 
         private void pbMain_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void updatePlayer()
+        {
+            if (marker != null)
+            {
+                float dx = marker.X - player.X;
+                float dy = marker.Y - player.Y;
+                float length = (float)Math.Sqrt(dx * dx + dy * dy);
+
+                dx /= length;
+                dy /= length;
+
+                player.vectorX = dx * 2f;
+                player.vectorY = dy * 2f;
+
+                player.Angle = 90 - (float)Math.Atan2(player.vectorX, player.vectorY) * 180 / (float)Math.PI;
+            }
+
+            player.vectorX += -player.vectorX * 0.1f;
+            player.vectorY += -player.vectorY * 0.1f;
+
+            player.X += player.vectorX;
+            player.Y += player.vectorY;
 
         }
 
@@ -42,39 +73,25 @@ namespace ZiminN_ISTb_21_2_lab5
 
             g.Clear(Color.White);
 
+            updatePlayer();
+
             foreach (var obj in objects.ToList())
             {
                 if (obj != player && player.Overlaps(obj, g))
                 {
                     player.Overlap(obj);
-                    obj.Overlap(player);
+                }               
+            }
 
-                    if (obj == marker)
-                    {
-                        objects.Remove(marker);
-                        marker = null;
-                    }
-                }
+            foreach (var obj in objects.ToList())
+            {
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (marker != null)
-            {
-                float dx = marker.X - player.X;
-                float dy = marker.Y - player.Y;
-
-                float length = (float)Math.Sqrt(dx * dx + dy * dy);
-                dx /= length;
-                dy /= length;
-
-                player.X += dx * 2;
-                player.Y += dy * 2;
-            }
-
+        {           
             pbMain.Invalidate();
         }
 
