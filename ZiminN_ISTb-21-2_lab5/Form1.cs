@@ -53,8 +53,8 @@ namespace ZiminN_ISTb_21_2_lab5
                 dx /= length;
                 dy /= length;
 
-                player.vectorX = dx * 2f;
-                player.vectorY = dy * 2f;
+                player.vectorX += dx * 0.5f;
+                player.vectorY += dy * 0.5f;
 
                 player.Angle = 90 - (float)Math.Atan2(player.vectorX, player.vectorY) * 180 / (float)Math.PI;
             }
