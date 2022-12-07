@@ -17,15 +17,15 @@ namespace ZiminN_ISTb_21_2_lab5
         Random random = new Random();
         Player player;
         Marker marker;
-        Target firstTarget, secondTarget;
+        FirstTarget firstTarget; SecondTarget secondTarget;
         public Form1()
         {
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
-            firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
-            secondTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+            firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
+            secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
             objects.Add(player);
             objects.Add(marker);
             objects.Add(firstTarget);
@@ -42,12 +42,21 @@ namespace ZiminN_ISTb_21_2_lab5
                 marker = null;
             };
 
-            player.OnTargetOverlap += (ft) =>
+            player.OnFirstTargetOverlap += (ft) =>
             {
                 objects.Remove(ft);
                 firstTarget = null;
                 labelScore.Text = $"Очки: {player.score}";
             };
+
+            player.OnSecondTargetOverlap += (st) =>
+            {
+                objects.Remove(st);
+                secondTarget = null;
+                labelScore.Text = $"Очки: {player.score}";
+            };
+
+
         }
 
         private void pbMain_Click(object sender, EventArgs e)
@@ -71,13 +80,13 @@ namespace ZiminN_ISTb_21_2_lab5
 
             if (firstTarget == null)
             {
-                firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+                firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
                 objects.Add(firstTarget);
             }
 
             if (secondTarget == null)
             {
-                secondTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+                secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
                 objects.Add(secondTarget);
             }
         }

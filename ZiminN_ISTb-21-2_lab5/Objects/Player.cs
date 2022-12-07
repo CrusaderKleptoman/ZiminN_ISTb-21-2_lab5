@@ -11,7 +11,8 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
     class Player : BaseObject
     {
         public Action<BaseObject> OnMarkerOverlap;
-        public Action<BaseObject> OnTargetOverlap;
+        public Action<BaseObject> OnFirstTargetOverlap;
+        public Action<BaseObject> OnSecondTargetOverlap;
         public int score = 0;
         public float vectorX, vectorY;
         public Player(float X, float Y, float Angle) : base(X, Y, Angle) { }
@@ -39,11 +40,20 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
                 OnMarkerOverlap(obj as Marker);
             }
 
-            if (obj is Target)
+            if (obj is SecondTarget)
             {
                 score++;
-                OnTargetOverlap(obj as Target);
+                OnSecondTargetOverlap(obj as SecondTarget);
+                return;
             }
+
+            if (obj is FirstTarget)
+            {
+                score++;
+                OnFirstTargetOverlap(obj as FirstTarget);
+                return;
+            }
+
         }
     }
 }

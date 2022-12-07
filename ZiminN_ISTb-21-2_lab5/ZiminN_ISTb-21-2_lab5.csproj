@@ -56,7 +56,8 @@
     <Compile Include="Objects\Marker.cs" />
     <Compile Include="Objects\MyRectangle.cs" />
     <Compile Include="Objects\Player.cs" />
-    <Compile Include="Objects\Target.cs" />
+    <Compile Include="Objects\FirstTarget.cs" />
+    <Compile Include="Objects\SecondTarget.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
