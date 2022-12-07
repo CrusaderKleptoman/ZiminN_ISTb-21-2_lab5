@@ -17,7 +17,7 @@ namespace ZiminN_ISTb_21_2_lab5
         Random random = new Random();
         Player player;
         Marker marker;
-        Target firstTarget, secondTarger;
+        Target firstTarget, secondTarget;
         public Form1()
         {
             InitializeComponent();
@@ -25,11 +25,11 @@ namespace ZiminN_ISTb_21_2_lab5
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
             firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
-            secondTarger = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+            secondTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
             objects.Add(player);
             objects.Add(marker);
             objects.Add(firstTarget);
-            objects.Add(secondTarger);
+            objects.Add(secondTarget);
 
             player.OnOverlap += (p, obj) =>
             {
@@ -42,9 +42,9 @@ namespace ZiminN_ISTb_21_2_lab5
                 marker = null;
             };
 
-            player.OnTargetOverlap += (t) =>
+            player.OnTargetOverlap += (ft) =>
             {
-                objects.Remove(t);
+                objects.Remove(ft);
                 firstTarget = null;
                 labelScore.Text = $"Очки: {player.score}";
             };
@@ -57,16 +57,28 @@ namespace ZiminN_ISTb_21_2_lab5
 
         private void updateTarget()
         {
+            if (firstTarget != null && firstTarget.TimerTic())
+            {
+                objects.Remove(firstTarget);
+                firstTarget = null;
+            }
+
+            if (secondTarget != null && secondTarget.TimerTic())
+            {
+                objects.Remove(secondTarget);
+                secondTarget = null;
+            }
+
             if (firstTarget == null)
             {
                 firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
                 objects.Add(firstTarget);
             }
 
-            if (secondTarger == null)
+            if (secondTarget == null)
             {
-                secondTarger = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
-                objects.Add(secondTarger);
+                secondTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+                objects.Add(secondTarget);
             }
         }
 
@@ -120,7 +132,7 @@ namespace ZiminN_ISTb_21_2_lab5
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {           
+        {
             pbMain.Invalidate();
         }
 

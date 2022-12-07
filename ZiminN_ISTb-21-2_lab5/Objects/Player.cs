@@ -14,8 +14,7 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
         public Action<BaseObject> OnTargetOverlap;
         public int score = 0;
         public float vectorX, vectorY;
-        public Player(float X, float Y, float Angle) : base(X, Y, Angle)
-        { }
+        public Player(float X, float Y, float Angle) : base(X, Y, Angle) { }
 
         public override void Render(Graphics graphics)
         {
