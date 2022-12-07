@@ -14,16 +14,22 @@ namespace ZiminN_ISTb_21_2_lab5
     public partial class Form1 : Form
     {
         List<BaseObject> objects = new List<BaseObject>();
+        Random random = new Random();
         Player player;
         Marker marker;
+        Target firstTarget, secondTarger;
         public Form1()
         {
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
+            firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+            secondTarger = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
             objects.Add(player);
             objects.Add(marker);
+            objects.Add(firstTarget);
+            objects.Add(secondTarger);
 
             player.OnOverlap += (p, obj) =>
             {
@@ -35,11 +41,33 @@ namespace ZiminN_ISTb_21_2_lab5
                 objects.Remove(m);
                 marker = null;
             };
+
+            player.OnTargetOverlap += (t) =>
+            {
+                objects.Remove(t);
+                firstTarget = null;
+                labelScore.Text = $"Очки: {player.score}";
+            };
         }
 
         private void pbMain_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void updateTarget()
+        {
+            if (firstTarget == null)
+            {
+                firstTarget = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+                objects.Add(firstTarget);
+            }
+
+            if (secondTarger == null)
+            {
+                secondTarger = new Target(random.Next(pbMain.Width - 20) + 20, random.Next(pbMain.Height - 20) + 20, 0);
+                objects.Add(secondTarger);
+            }
         }
 
         private void updatePlayer()
@@ -74,6 +102,7 @@ namespace ZiminN_ISTb_21_2_lab5
             g.Clear(Color.White);
 
             updatePlayer();
+            updateTarget();
 
             foreach (var obj in objects.ToList())
             {
@@ -104,6 +133,11 @@ namespace ZiminN_ISTb_21_2_lab5
             }
             marker.X = e.X;
             marker.Y = e.Y;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

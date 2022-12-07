@@ -33,6 +33,7 @@ namespace ZiminN_ISTb_21_2_lab5
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.labelScore = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,17 +62,29 @@ namespace ZiminN_ISTb_21_2_lab5
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
+            // labelScore
+            // 
+            this.labelScore.AutoSize = true;
+            this.labelScore.Location = new System.Drawing.Point(638, 12);
+            this.labelScore.Name = "labelScore";
+            this.labelScore.Size = new System.Drawing.Size(44, 13);
+            this.labelScore.TabIndex = 2;
+            this.labelScore.Text = "Очки: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 450);
+            this.Controls.Add(this.labelScore);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -80,6 +93,7 @@ namespace ZiminN_ISTb_21_2_lab5
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label labelScore;
     }
 }
 
