@@ -11,7 +11,7 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
     class FirstTarget : BaseObject
     {
         public int timerToMove;
-        public FirstTarget(float X, float Y, float Angle) : base(X, Y, Angle) 
+        public FirstTarget(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender)
         {
             this.timerToMove = 80;
         }

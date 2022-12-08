@@ -18,18 +18,21 @@ namespace ZiminN_ISTb_21_2_lab5
         Player player;
         Marker marker;
         FirstTarget firstTarget; SecondTarget secondTarget;
+        BlackZone blackZone;
         public Form1()
         {
             InitializeComponent();
 
-            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
-            marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
-            firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
-            secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
+            player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0, false);
+            marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0, false);
+            firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0, false);
+            secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0, false);
+            blackZone = new BlackZone(pbMain.Width / 2, pbMain.Height / 2, 0, false);
             objects.Add(player);
             objects.Add(marker);
             objects.Add(firstTarget);
             objects.Add(secondTarget);
+            objects.Add(blackZone);
 
             player.OnOverlap += (p, obj) =>
             {
@@ -56,6 +59,10 @@ namespace ZiminN_ISTb_21_2_lab5
                 labelScore.Text = $"Очки: {player.score}";
             };
 
+            /*player.OnBlackZoneOverlap += (bz) =>
+            {
+                
+            };*/
 
         }
 
@@ -80,19 +87,20 @@ namespace ZiminN_ISTb_21_2_lab5
 
             if (firstTarget == null)
             {
-                firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
+                firstTarget = new FirstTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0, false);
                 objects.Add(firstTarget);
             }
 
             if (secondTarget == null)
             {
-                secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0);
+                secondTarget = new SecondTarget(random.Next(pbMain.Width - 30) + 30, random.Next(pbMain.Height - 30) + 30, 0, false);
                 objects.Add(secondTarget);
             }
         }
 
         private void updatePlayer()
         {
+
             if (marker != null)
             {
                 float dx = marker.X - player.X;
@@ -149,7 +157,7 @@ namespace ZiminN_ISTb_21_2_lab5
         {
             if (marker == null)
             {
-                marker = new Marker(0, 0, 0);
+                marker = new Marker(0, 0, 0, false);
                 objects.Add(marker);
             }
             marker.X = e.X;

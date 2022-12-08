@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace ZiminN_ISTb_21_2_lab5.Objects
 {
-    class Marker : BaseObject
+    internal class BlackZone : BaseObject
     {
-        public Marker(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender) { }
+        public BlackZone(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender) { }
 
         public override void Render(Graphics graphics)
         {
-            graphics.FillEllipse(new SolidBrush(Color.Red), -3, -3, 6, 6);
-            graphics.DrawEllipse(new Pen(Color.Red, 2), -6, -6, 12, 12);
-            graphics.DrawEllipse(new Pen(Color.Red, 2), -10, -10, 20, 20);
+            graphics.FillRectangle(new SolidBrush(Color.Black), -150, -223, 150, 223);
         }
 
         public override GraphicsPath GetGraphicsPath()
         {
             var path = base.GetGraphicsPath();
-            path.AddEllipse(-3, -3, 6, 6);
+            path.AddEllipse(-70, -223, 70, 223);
             return path;
         }
     }

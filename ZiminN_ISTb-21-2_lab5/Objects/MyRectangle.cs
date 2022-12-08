@@ -9,7 +9,7 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
 {
     class MyRectangle : BaseObject 
     {
-        public MyRectangle(float x, float y, float angle) : base(x, y, angle)
+        public MyRectangle(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender)
         {
         }
 
