@@ -10,7 +10,7 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
 {
     class Marker : BaseObject
     {
-        public Marker(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender) { }
+        public Marker(float X, float Y, float Angle) : base(X, Y, Angle) { }
 
         public override void Render(Graphics graphics)
         {

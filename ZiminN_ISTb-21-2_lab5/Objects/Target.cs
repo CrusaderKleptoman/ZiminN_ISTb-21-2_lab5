@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace ZiminN_ISTb_21_2_lab5.Objects
 {
-    class FirstTarget : BaseObject
+    class Target : BaseObject
     {
         public int timerToMove;
-        public FirstTarget(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender)
+        public Target(float X, float Y, float Angle) : base(X, Y, Angle)
         {
             this.timerToMove = 80;
         }

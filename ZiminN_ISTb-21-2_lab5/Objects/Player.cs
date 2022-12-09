@@ -11,21 +11,14 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
     class Player : BaseObject
     {
         public Action<BaseObject> OnMarkerOverlap;
-        public Action<BaseObject> OnFirstTargetOverlap;
-        public Action<BaseObject> OnSecondTargetOverlap;
-        public Action<BaseObject> OnBlackZoneOverlap;
+        public Action<BaseObject> OnTargetOverlap;
+        
         public int score = 0;
         public float vectorX, vectorY;
-        public Player(float X, float Y, float Angle, bool NegateRender) : base(X, Y, Angle, NegateRender) { }
+        public Player(float X, float Y, float Angle) : base(X, Y, Angle) { }
 
         public override void Render(Graphics graphics)
         {
-            if (NegateRender)
-            {
-                graphics.FillEllipse(new SolidBrush(Color.White), -15, -15, 30, 30);
-                graphics.DrawLine(new Pen(Color.Black, 2), 0, 0, 25, 0);
-            }
-
             graphics.FillEllipse(new SolidBrush(Color.SteelBlue), -15, -15, 30, 30);
             graphics.DrawEllipse(new Pen(Color.Black, 2), -15, -15, 30, 30);
             graphics.DrawLine(new Pen(Color.Black, 2), 0, 0, 25, 0);
@@ -47,24 +40,10 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
                 OnMarkerOverlap(obj as Marker);
             }
 
-            /*if (obj is BlackZone)
-            {
-                NegateRender = true;
-                OnBlackZoneOverlap(obj as BlackZone);
-            }*/
-
-            if (obj is SecondTarget)
+            if (obj is Target)
             {
                 score++;
-                OnSecondTargetOverlap(obj as SecondTarget);
-                return;
-            }
-
-            if (obj is FirstTarget)
-            {
-                score++;
-                OnFirstTargetOverlap(obj as FirstTarget);
-                return;
+                OnTargetOverlap(obj as Target);
             }
 
         }

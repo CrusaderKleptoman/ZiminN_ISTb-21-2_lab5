@@ -13,16 +13,14 @@ namespace ZiminN_ISTb_21_2_lab5.Objects
         public float X;
         public float Y;
         public float Angle;
-        public bool NegateRender;
 
         public Action<BaseObject, BaseObject> OnOverlap;
 
-        public BaseObject(float x, float y, float angle, bool negateRender)
+        public BaseObject(float x, float y, float angle)
         {
             X = x;
             Y = y;
             Angle = angle;
-            NegateRender = negateRender;
         }
 
         public Matrix GetTransform()
